@@ -40,10 +40,11 @@
   <!-- End Google Tag Manager -->
 </head>
 
-@include('admin.navbar')
+{{-- @include('admin.navbar') --}}
+<body class="">
 @include('admin.header')
 @yield('content')
-@include('admin.footer')
+{{-- @include('admin.footer') --}}
 
 <!--   Core JS Files   -->
 <script src="{{ asset('admin/js/core/jquery.min.js') }}"></script>

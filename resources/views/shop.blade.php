@@ -19,6 +19,20 @@
       <section class="ftco-section bg-light">
       <div class="container-fluid">
           <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-10 form-group">
+                                <input type="text" id="search" name="search" class="form-control" placeholder="Cari Nama Merchant" maxlength="100" required>
+                            </div>
+                            <div class="col-2 form-group">
+                                <input type="submit" id="abc" value="Submit" class="btn btn-primary py-2 px-4">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-1"></div>
               <div class="col-sm col-md-6 col-lg-3 ftco-animate">
                   <div class="product">
                       <a href="#" class="img-prod"><img class="img-fluid" src="images/product-1.jpg" alt="Colorlib Template">

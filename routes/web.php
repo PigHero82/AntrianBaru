@@ -28,9 +28,21 @@ Route::get('/counter', function () {
 ############################################################################
 
 // Admin
-Route::get('/administrator', function () {
-    return view('admin.index');
-});
+// Merchant
+Route::resource('/administrator', 'SubmerchantController');
+// Route::get('/administrator', function () {
+//     return view('admin.index');
+// });
+// Route::get('/administrator/antrian', function () {
+//     return view('admin.antrian');
+// });
+
+############################################################################
+
+//Front
+Route::get('/', 'FrontController@index');
+Route::get('/merchant/{id}', 'FrontController@show')->name('show.antrian');
+Route::post('/merchant', 'FrontController@store')->name('store.antrian');
 
 ############################################################################
 
@@ -62,8 +74,8 @@ Route::get('/product-single', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 ############################################################################
