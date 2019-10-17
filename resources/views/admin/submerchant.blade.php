@@ -99,6 +99,18 @@
 													<div class="form-group">
 														<label for="nama" class="bmd-label-floating">Nama Merchant (wajib diisi)</label>
 														<input type="text" class="form-control" id="nama" name="nama" required>
+
+													</div>
+												</div>
+												<div class="input-group form-control-lg">
+													<div class="input-group-prepend">
+														<span class="input-group-text">
+															<i class="material-icons">place</i>
+														</span>
+													</div>
+													<div class="form-group">
+														<label for="alamat" class="bmd-label-floating">Alamat (wajib diisi)</label>
+														<textarea class="form-control" name="alamat" rows="3" required></textarea>
 													</div>
 												</div>
 												<div class="input-group form-control-lg">

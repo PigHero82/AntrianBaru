@@ -27,15 +27,16 @@ Route::get('/counter', function () {
 
 ############################################################################
 
+// Administrator
 // Admin
-// Merchant
-Route::resource('/administrator', 'SubmerchantController');
-// Route::get('/administrator', function () {
-//     return view('admin.index');
-// });
-// Route::get('/administrator/antrian', function () {
-//     return view('admin.antrian');
-// });
+Route::resource('/administrator', 'AdminController');
+Route::resource('/submerchant', 'SubmerchantController');
+Route::get('/adminn', function () {
+    return view('admin.admin');
+});
+
+//Merchant
+Route::resource('/adminmerchant', 'MerchantController');
 
 ############################################################################
 
@@ -43,6 +44,13 @@ Route::resource('/administrator', 'SubmerchantController');
 Route::get('/', 'FrontController@index');
 Route::get('/merchant/{id}', 'FrontController@show')->name('show.antrian');
 Route::post('/merchant', 'FrontController@store')->name('store.antrian');
+
+############################################################################
+
+//Tes Role
+Route::get('/abc', 'adminController@index');
+// Route::get('/merchant/{id}', 'FrontController@show')->name('show.antrian');
+// Route::post('/merchant', 'FrontController@store')->name('store.antrian');
 
 ############################################################################
 

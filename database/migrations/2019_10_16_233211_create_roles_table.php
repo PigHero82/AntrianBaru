@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMerchantsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateMerchantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('merchants', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
-            $table->string('alamat');
-            $table->text('deskripsi');
-            $table->string('gambar');
             $table->integer('iduser');
+            $table->integer('role');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateMerchantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('merchants');
+        Schema::dropIfExists('roles');
     }
 }
