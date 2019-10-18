@@ -19,6 +19,7 @@ class CreateSubmerchantsTable extends Migration
             $table->string('nama');
             $table->text('deskripsi');
             $table->string('gambar');
+            $table->integer('user');
             $table->timestamps();
         });
     }

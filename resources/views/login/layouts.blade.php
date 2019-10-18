@@ -42,7 +42,7 @@
 
 @include('login.header')
 @yield('content')
-@include('login.footer')
+{{-- @include('login.footer') --}}
 
   <!--   Core JS Files   -->
   <script src="{{ asset('admin/js/core/jquery.min.js') }}"></script>

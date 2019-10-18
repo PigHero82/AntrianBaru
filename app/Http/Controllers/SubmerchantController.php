@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Submerchant;
 use App\Antre;
+use App\User;
 use Illuminate\Http\Request;
 
 class SubmerchantController extends Controller
@@ -38,6 +39,7 @@ class SubmerchantController extends Controller
      */
     public function store(Request $request)
     {
+        $iduser = User::count()+1;
         $request->validate([
             'nama'      => 'required',
             'deskripsi' => 'required',
@@ -53,10 +55,11 @@ class SubmerchantController extends Controller
             'nama'       => $request->nama,
             'deskripsi'  => $request->deskripsi,
             'gambar'     => $new_name,
+            'user'       => $new_name,
         );
 
         $submerchant = Submerchant::create($form_data);
-   
+
         return redirect('/administrator')->with('success', 'Blog is successfully saved');
         // echo $form_data;
     }

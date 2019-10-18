@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Merchant;
 use App\SubMerchant;
 use App\User;
 use App\Role;
 use Auth;
-use Illuminate\Http\Request;
 
-class MerchantController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -20,7 +20,7 @@ class MerchantController extends Controller
     {
         $this->middleware('auth');
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -30,12 +30,14 @@ class MerchantController extends Controller
     {
         $idrole = Role::where('iduser', auth::id())->first();
         if ($idrole->role == 1) {
-            return redirect('/administrator');
+            $merchants = Merchant::get();
+            $merchantcount = Merchant::count();
+            $merchantlast = Merchant::latest()->first();
+            $user = User::where('id', auth::id())->first();
+            return view('admin.admin', compact('merchants', 'merchantcount', 'merchantlast', 'user'));
         }
         else if ($idrole->role == 2) {
-            $submerchants = Submerchant::orderBy('id', 'DESC')->get();
-
-            return view('admin.index', compact('submerchants'));
+            return redirect('/merchant');
         }
         else if ($idrole->role == 3) {
             return redirect('/submerchant');
@@ -52,7 +54,7 @@ class MerchantController extends Controller
      */
     public function create()
     {
-        return view('admin.submerchantcreate');
+        return view('admin.merchantcreate');
     }
 
     /**
@@ -75,46 +77,44 @@ class MerchantController extends Controller
         $iduser = User::latest()->first();
 
         // Tambah Merchant
-        // $request->validate([
-            // 'nama'      => 'required',
-            // 'deskripsi' => 'required',
-            // 'gambar'    => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
+        $request->validate([
+            'nama'      => 'required',
+            'alamat'    => 'required',
+            'deskripsi' => 'required',
+            'gambar'    => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
         $image = $request->file('gambar');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move('images/submerchant', $new_name);
+        $image->move('images/merchant', $new_name);
 
         $form_data = array(
-            'idmerchant' => auth::id(),
             'nama'       => $request->nama,
+            'alamat'     => $request->alamat,
             'deskripsi'  => $request->deskripsi,
             'gambar'     => $new_name,
-            'user'       => $iduser->id,
+            'iduser'     => $iduser->id,
         );
 
         // Tambah Role
         $role = [
             'iduser'   => $iduser->id,
-            'role'     => '3',
+            'role'     => '2',
         ];
-
-        echo $role;
-        echo $form_data;
         
-        // $merchant = Merchant::create($form_data);
-        // $roles = Role::create($role);
+        $merchant = Merchant::create($form_data);
+        $roles = Role::create($role);
 
-        // return redirect('/adminmerchant')->with('success', 'Blog is successfully saved');
+        return redirect('/administrator')->with('success', 'Blog is successfully saved');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Merchant  $merchant
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Merchant $merchant)
+    public function show($id)
     {
         //
     }
@@ -122,10 +122,10 @@ class MerchantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Merchant  $merchant
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Merchant $merchant)
+    public function edit($id)
     {
         //
     }
@@ -134,10 +134,10 @@ class MerchantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Merchant  $merchant
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Merchant $merchant)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -145,10 +145,10 @@ class MerchantController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Merchant  $merchant
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Merchant $merchant)
+    public function destroy($id)
     {
         //
     }

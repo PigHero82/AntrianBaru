@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <h3>
           Sub Merchant |
-          <a href="{{ route('administrator.create') }}" class="btn btn-success">
+          <a href="{{ route('adminmerchant.create') }}" class="btn btn-success">
             <span class="btn-label">
               <i class="material-icons">add</i>
             </span>
