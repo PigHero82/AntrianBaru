@@ -24,12 +24,13 @@
       </div>
       <div class="col-lg-6 product-details pl-md-5 ftco-animate">
         <h3>{{$submerchant->nama}}</h3>
-        <h3>PT. ABC</h3>
+        <h3>{{$submerchant->name}}</h3>
+        {{-- <h3>PT. ABC</h3> --}}
         <p>{{$submerchant->deskripsi}}</p>
         <h5>Jumlah Pengantre : {{$countall}}</h5>
         <h5>Antrian saat ini : {{$countactive}}</h5>
         <div class="row mt-4">
-          <form action="{{ route('store.antrian') }}" method="post">
+          <form action="{{ route('submerchant.store') }}" method="post">
             @csrf
             <div class="form-group">
               <input type="text" id="idantre" name="idantre" class="form-control" value="{{$submerchant->id}}" hidden>

@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Submerchant;
 use App\Antre;
 use App\User;
-use Illuminate\Http\Request;
+use App\Role;
+use Auth;
 
 class SubmerchantController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +28,26 @@ class SubmerchantController extends Controller
      */
     public function index()
     {
-        $submerchants = Submerchant::orderBy('id', 'DESC')->get();
+        $idrole = Role::where('iduser', auth::id())->first();
+        if ($idrole->role == 1) {
+            return redirect('/administrator');
+        }
+        else if ($idrole->role == 2) {
+            return redirect('/adminmerchant');
+        }
+        else if ($idrole->role == 3) {
+            $submerchants = Submerchant::where('user', Auth::id())
+                     ->join('antres', 'submerchants.id', '=', 'antres.idantre')
+                     ->join('users', 'antres.iduser', '=', 'users.id')
+                     ->select('antres.iduser', 'antres.noantre', 'antres.status', 'users.name')
+                     ->get();
 
-        return view('admin.index', compact('submerchants'));
+            return view('admin.antrian', compact('submerchants'));
+            // var_dump(Auth::id());
+        }
+        else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -39,29 +68,18 @@ class SubmerchantController extends Controller
      */
     public function store(Request $request)
     {
-        $iduser = User::count()+1;
-        $request->validate([
-            'nama'      => 'required',
-            'deskripsi' => 'required',
-            'gambar'    => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-        $image = $request->file('gambar');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move('images/submerchant', $new_name);
+        $no = Antre::where('idantre', $request->idantre)->count();
 
         $form_data = array(
-            'idmerchant' => '1',
-            'nama'       => $request->nama,
-            'deskripsi'  => $request->deskripsi,
-            'gambar'     => $new_name,
-            'user'       => $new_name,
+            'iduser'    => Auth::id(),
+            'idantre'   => $request->idantre,
+            'noantre'   => $no+1,
+            'status'    => '0',
         );
 
-        $submerchant = Submerchant::create($form_data);
+        $antre = Antre::create($form_data);
 
-        return redirect('/administrator')->with('success', 'Blog is successfully saved');
-        // echo $form_data;
+        return redirect('/')->with('success', 'Data is successfully saved');
     }
 
     /**

@@ -41,7 +41,7 @@
 									<a href="{{ route('show.antrian', $submerchant->id) }}" class="img-prod"><img class="img-fluid" src="{{ asset('images/submerchant/'.$submerchant->gambar) }}" alt="Colorlib Template"></a>
                       <div class="text py-3 px-3">
                           <h3><a href="{{ route('show.antrian', $submerchant->id) }}">{{$submerchant->nama}}</a></h3>
-                          <h3><a href="{{ route('show.antrian', $submerchant->id) }}">Rumah Sakit ABC</a></h3>
+                          <h3><a href="{{ route('show.antrian', $submerchant->id) }}">{{$submerchant->name}}</a></h3>
                           {{-- <h3><a href="#">Antrian sekarang : 5/9</a></h3> --}}
                           <hr>
                           <p class="bottom-area d-flex">

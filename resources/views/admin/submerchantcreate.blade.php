@@ -21,7 +21,7 @@
 				<!--      Wizard container        -->
 				<div class="wizard-container">
 					<div class="card card-wizard" data-color="rose" id="wizardProfile">
-						<form action="{{ route('administrator.store') }}" method="POST" enctype="multipart/form-data">
+						<form action="{{ route('adminmerchant.store') }}" method="POST" enctype="multipart/form-data">
 							@csrf
 							<!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
 							<div class="card-header text-center">

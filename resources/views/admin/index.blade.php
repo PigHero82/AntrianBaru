@@ -33,7 +33,7 @@
                   <button type="button" class="btn btn-danger btn-link fix-broken-card">
                     <i class="material-icons">build</i> Fix Header!
                   </button>
-                  <a href="{{ route('administrator.show', $submerchant->id) }}" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
+                  <a href="{{ route('adminmerchant.show', $submerchant->id) }}" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
                     <i class="material-icons">art_track</i>
                   </a>
                   <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">

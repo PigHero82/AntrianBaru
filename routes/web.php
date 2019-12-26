@@ -48,7 +48,7 @@ Route::post('/merchant', 'FrontController@store')->name('store.antrian');
 ############################################################################
 
 //Tes Role
-Route::get('/abc', 'adminController@index');
+// Route::get('/abc', 'adminController@index');
 // Route::get('/merchant/{id}', 'FrontController@show')->name('show.antrian');
 // Route::post('/merchant', 'FrontController@store')->name('store.antrian');
 

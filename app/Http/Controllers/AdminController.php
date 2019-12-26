@@ -16,10 +16,10 @@ class AdminController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     
     /**
      * Display a listing of the resource.
@@ -28,23 +28,23 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $idrole = Role::where('iduser', auth::id())->first();
-        if ($idrole->role == 1) {
+        // $idrole = Role::where('iduser', auth::id())->first();
+        // if ($idrole->role == 1) {
             $merchants = Merchant::get();
             $merchantcount = Merchant::count();
             $merchantlast = Merchant::latest()->first();
-            $user = User::where('id', auth::id())->first();
+            $user = User::where('isd', auth::id())->first();
             return view('admin.admin', compact('merchants', 'merchantcount', 'merchantlast', 'user'));
-        }
-        else if ($idrole->role == 2) {
-            return redirect('/merchant');
-        }
-        else if ($idrole->role == 3) {
-            return redirect('/submerchant');
-        }
-        else {
-            return redirect('/');
-        }
+        // }
+        // else if ($idrole->role == 2) {
+        //     return redirect('/merchant');
+        // }
+        // else if ($idrole->role == 3) {
+        //     return redirect('/submerchant');
+        // }
+        // else {
+        //     return redirect('/');
+        // }
     }
 
     /**

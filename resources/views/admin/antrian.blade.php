@@ -43,7 +43,7 @@
                       {{ $submerchant->noantre }}
                     </td>
                     <td>
-                      {{ $submerchant->iduser }}
+                      {{ $submerchant->name }}
                     </td>
                     <td>
                       @if ($submerchant->status == '0')

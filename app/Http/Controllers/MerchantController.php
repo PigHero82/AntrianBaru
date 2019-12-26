@@ -33,7 +33,7 @@ class MerchantController extends Controller
             return redirect('/administrator');
         }
         else if ($idrole->role == 2) {
-            $submerchants = Submerchant::orderBy('id', 'DESC')->get();
+            $submerchants = Submerchant::where('idmerchant', auth::id())->orderBy('id', 'DESC')->get();
 
             return view('admin.index', compact('submerchants'));
         }
@@ -75,37 +75,37 @@ class MerchantController extends Controller
         $iduser = User::latest()->first();
 
         // Tambah Merchant
-        // $request->validate([
-            // 'nama'      => 'required',
-            // 'deskripsi' => 'required',
-            // 'gambar'    => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
+        $request->validate([
+            'nama'      => 'required',
+            'deskripsi' => 'required',
+            'gambar'    => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
         $image = $request->file('gambar');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move('images/submerchant', $new_name);
+         $new_name = rand() . '.' . $image->getClientOriginalExtension();
+         $image->move('images/submerchant', $new_name);
+       
 
-        $form_data = array(
-            'idmerchant' => auth::id(),
+        $form_data = [
+            'idmerchant' => Auth::id(),
             'nama'       => $request->nama,
             'deskripsi'  => $request->deskripsi,
             'gambar'     => $new_name,
             'user'       => $iduser->id,
-        );
+        ];
 
-        // Tambah Role
+        
+        // // Tambah Role
         $role = [
             'iduser'   => $iduser->id,
             'role'     => '3',
         ];
 
-        echo $role;
-        echo $form_data;
         
-        // $merchant = Merchant::create($form_data);
-        // $roles = Role::create($role);
-
-        // return redirect('/adminmerchant')->with('success', 'Blog is successfully saved');
+        $merchant = Submerchant::create($form_data);
+        $roles = Role::create($role);
+        
+        return redirect('/adminmerchant')->with('success', 'Blog is successfully saved');
     }
 
     /**
@@ -114,9 +114,15 @@ class MerchantController extends Controller
      * @param  \App\Merchant  $merchant
      * @return \Illuminate\Http\Response
      */
-    public function show(Merchant $merchant)
+    public function show($id)
     {
-        //
+        $submerchants = Submerchant::where('idantre', $id)
+                     ->join('antres', 'submerchants.id', '=', 'antres.idantre')
+                     ->join('users', 'antres.iduser', '=', 'users.id')
+                     ->select('antres.iduser', 'antres.noantre', 'antres.status', 'users.name')
+                     ->get();
+
+        return view('admin.antrian', compact('submerchants'));
     }
 
     /**
