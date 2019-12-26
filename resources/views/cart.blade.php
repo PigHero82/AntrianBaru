@@ -5,12 +5,12 @@
 @section('indexinactive', 'active')
 
 @section('content')
-<div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+<div class="hero-wrap hero-bread" style="background-image: url('images/rsb2.jpg');">
     <div class="container">
       <div class="row no-gutters slider-text align-items-center justify-content-center">
         <div class="col-md-9 ftco-animate text-center">
           <h1 class="mb-0 bread">Antrianku</h1>
-          <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Antrian</span></p>
+          <p class="breadcrumbs"><span>SakuAntri</<span></p>
         </div>
       </div>
     </div>
@@ -31,13 +31,13 @@
                           </thead>
                           <tbody>
                             <tr class="text-center">
-                              <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
+                              <td class="image-prod"><div class="img" style="background-image:url(images/rs2.jpg);"></div></td>
                               
                               <td class="product-name">
                                   {{-- Nama Sub Merchant --}}
                                   <h3>Poli Gigi</h3>
                                   {{-- Nama Merchant --}}
-                                  <p>Rumah Sakit apa aja</p>
+                                  <p>Rumah Sakit Disini</p>
                               </td>
                               
                               <td class="price">9</td>
@@ -45,13 +45,13 @@
                             </tr><!-- END TR-->
 
                             <tr class="text-center">
-                              <td class="image-prod"><div class="img" style="background-image:url(images/product-4.jpg);"></div></td>
+                              <td class="image-prod"><div class="img" style="background-image:url(images/rs2.jpg);"></div></td>
                               
                               <td class="product-name">
                                     {{-- Nama Sub Merchant --}}
                                     <h3>Poli Gigi</h3>
                                     {{-- Nama Merchant --}}
-                                    <p>Rumah Sakit apa aja</p>
+                                    <p>Rumah Sakit Disana</p>
                                 </td>
                                 
                               <td class="price">17</td>
